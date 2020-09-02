@@ -8,5 +8,3 @@ class PyvisException(IOError):
 
 class TokenError(PyvisException):
     """A Token Error Occurred"""
-
-
