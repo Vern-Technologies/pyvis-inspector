@@ -1,9 +1,10 @@
 
 import requests as res
 import json
-from typing import Union
-
 from . import tokens
+
+
+# TODO: add class doc strings
 
 
 class Inferences:
@@ -11,24 +12,12 @@ class Inferences:
     def __init__(self):
         self.path = "http://poc.maximovisualinspection.com/visual-inspection-ny/api/"
 
-# class Object(object):
-#     """
-#     Class built for converting Firebase database query returns to python Objects
-#     """
-#
-#     def __init__(self, args: dict):
-#         for key, value in args.items():
-#             setattr(self, key, value)
-#
-#     def attributes(self):
-#         return [x for x in self.__dict__.keys()]
-
 
 class Inspection(Inferences):
 
     def inspect(self, model_id: str, imageUrl: str, **kwargs) -> dict:
         """
-        Checks image against Visual Inspector Deployed Model
+        Checks image against a Visual Inspector Deployed Model
 
         :param model_id: ID of deployed model
         :param imageUrl: URL image path to run check against.
@@ -59,19 +48,17 @@ class Inspection(Inferences):
         above the confthre value, up to the indicated value matches are included in the result. Values are integer
         values where 0 is the default (which means to include all possible matches in the results).
 
-        # TODO: change endpoint info in description to class function when built
-
         waitForResults: (optional) This parameter is used for video inferencing. By default, video inference results are
         reported asynchronously -- meaning that the call to do the inference will return while processing continues on
         the video. Inference results are available via the /inferences endpoint. If this parameter is passed with a
         value of "true" (case is ignored), the endpoint will not return until the video has completed processing. The
         JSON results will be returned at that time. Note that the JSON results will also be available via the
-        /inferences endpoint.
+        VideoInferences class.
 
         genCaption: (optional) This parameter is used for video inferencing. It controls whether or not a "captioned"
         video should be generated and stored with the inferencing results. The default varies by the detection being
         done. For Action Detection, the default is to generate a captioned video. For Object Detection, the default
-        is to NOT generate a captioned video. The captioned video is accessible via the /inferences endpoint.
+        is to NOT generate a captioned video. The captioned video is accessible via the VideoInferences class.
 
         :return: Dictionary of model results
         """
@@ -85,6 +72,7 @@ class Inspection(Inferences):
 
     def inspect_up(self, model_id: str, image_path: str, **kwargs) -> dict:
         """
+        Checks image against a Visual Inspector Deployed Model
 
         :param model_id: ID of deployed model
         :param image_path: Local image path to run check against.
@@ -115,19 +103,17 @@ class Inspection(Inferences):
         above the confthre value, up to the indicated value matches are included in the result. Values are integer
         values where 0 is the default (which means to include all possible matches in the results).
 
-        # TODO: change endpoint info in description to class function when built
-
         waitForResults: (optional) This parameter is used for video inferencing. By default, video inference results are
         reported asynchronously -- meaning that the call to do the inference will return while processing continues on
         the video. Inference results are available via the /inferences endpoint. If this parameter is passed with a
         value of "true" (case is ignored), the endpoint will not return until the video has completed processing. The
         JSON results will be returned at that time. Note that the JSON results will also be available via the
-        /inferences endpoint.
+        VideoInferences class.
 
         genCaption: (optional) This parameter is used for video inferencing. It controls whether or not a "captioned"
         video should be generated and stored with the inferencing results. The default varies by the detection being
         done. For Action Detection, the default is to generate a captioned video. For Object Detection, the default
-        is to NOT generate a captioned video. The captioned video is accessible via the /inferences endpoint.
+        is to NOT generate a captioned video. The captioned video is accessible via the VideoInferences class.
 
         :return: Dictionary of model results
         """
@@ -146,9 +132,10 @@ class VideoInferences(Inferences):
 
     def retrieve_all(self, **kwargs) -> dict:
         """
+        Retrieves all active and completed video inference results. Video inferences are Action Detection inferences
+        and Video Object Detection inferences. Results are ordered by creation date, oldest to newest.
 
-        :param kwargs:
-        :return:
+        :return: Dictionary of all inference results
         """
 
         message = self.path + f"inferences"

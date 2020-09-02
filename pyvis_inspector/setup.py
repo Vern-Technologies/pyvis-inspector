@@ -1,6 +1,6 @@
 import setuptools
 
-with open("pyvis-inspector/README.md", "r") as fh:
+with open("pyvis_inspector/README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
