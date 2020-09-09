@@ -4,16 +4,15 @@ import json
 from . import tokens
 
 
-# TODO: add class doc strings
-
-
 class Inferences:
-
     def __init__(self):
         self.path = "http://poc.maximovisualinspection.com/visual-inspection-ny/api/"
 
 
 class Inspection(Inferences):
+    """
+    Class for doing inferences on Visual Inspector deployed models
+    """
 
     def inspect(self, model_id: str, imageUrl: str, **kwargs) -> dict:
         """
@@ -125,6 +124,9 @@ class Inspection(Inferences):
 
 
 class VideoInferences(Inferences):
+    """
+    Class for managing PowerAI-Vision Video Inference Results
+    """
 
     def __init__(self, username: str, password: str):
         super().__init__()
@@ -134,6 +136,25 @@ class VideoInferences(Inferences):
         """
         Retrieves all active and completed video inference results. Video inferences are Action Detection inferences
         and Video Object Detection inferences. Results are ordered by creation date, oldest to newest.
+
+        newer_than: (optional) optional parameter to filter the inference results to only get results with updates more
+        recent than the given date/time stamp of the form "YYYY/MM/DDTHH:MM:SS". Note that all times are UTC times.
+
+            Example: ?newer_than="2019/06/01T09:11:48"
+
+        model_id: (optional) Optional parameter to limit results to those inference performed by the given model.
+
+            Example: ?model_id="model-id-string"
+
+        status: (optional) optional parameter to filter the background tasks to only get tasks with the given status.
+        Possible status values are starting, working, completed, and failed.
+
+        sortby: (optional) A comma separated string of field names on which to sort. Add " DESC" after a field name to
+        change to a descending sort.
+
+            Examples:
+                two field sort: ?sortby=model_id
+                descending sort: ?sortby=model_id, status DESC, total_frames
 
         :return: Dictionary of all inference results
         """
