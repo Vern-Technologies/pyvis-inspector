@@ -5,14 +5,14 @@ with open("pyvis_inspector/README.md", "r") as fh:
 
 setuptools.setup(
     name="pyvis-inspector",
-    version="0.0.1",
+    version="0.0.2",
     license="MIT",
     author="Matthew Ashley",
     author_email="matthewashley@verntechnologies.com",
     description="A simple python wrapper for the IBM Vision Service API",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/matthewashley1/pyvis-inspector",
+    url="https://github.com/Vern-Technologies/pyvis-inspector",
     packages=setuptools.find_packages(),
     install_requires=[
         'requests',
